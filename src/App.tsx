@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+const WeatherApp = () => {
+  const [weatherData, setWeatherData] = useState(null);
+
+  useEffect(() => {
+    const city = `Cracow`;
+    const fetchWeatherData = async () => {
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+          const data = await response.json();
+          setWeatherData(data);
+          console.log(data);
+        } else {
+          console.error(
+            "Failed to fetch weather data:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchWeatherData();
+  }, []);
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
+
+  // Display the weather data
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Current Weather</h1>
     </div>
   );
-}
+};
 
-export default App;
+export default WeatherApp;
