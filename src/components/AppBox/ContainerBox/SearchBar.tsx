@@ -3,8 +3,8 @@ import Button from "../Buttons";
 import { BiSearch } from "react-icons/bi";
 
 interface SearchBarProps {
-  searchRef: React.RefObject<HTMLInputElement>;
-  fetchWeatherData: (e: React.FormEvent<HTMLFormElement>) => void;
+  readonly searchRef: React.RefObject<HTMLInputElement>;
+  readonly fetchWeatherData: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 function SearchBar({ searchRef, fetchWeatherData }: SearchBarProps) {
