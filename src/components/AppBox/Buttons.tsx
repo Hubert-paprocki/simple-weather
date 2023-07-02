@@ -23,7 +23,7 @@ function Button({
   }
   if (search) {
     classes +=
-      " h-10 text-2xl bg-stone-50 border-l-[5px] px-4 rounded-r-md hover:text-teal-500 hover:bg-teal-50 duration-200";
+      " h-10 text-2xl bg-slate-50 border-l-[5px] px-4 rounded-r-md hover:text-teal-500 hover:bg-teal-50 duration-200";
   }
   if (disabled) {
     classes += " opacity-40 hover:translate-y-0 active:translate-y-0";

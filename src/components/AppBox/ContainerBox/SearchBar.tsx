@@ -9,11 +9,11 @@ interface SearchBarProps {
 
 function SearchBar({ searchRef, fetchWeatherData }: SearchBarProps) {
   return (
-    <form className="w-full flex h-10" onSubmit={fetchWeatherData}>
+    <form className="w-3/4 max-w-5xl flex h-10 " onSubmit={fetchWeatherData}>
       <input
         ref={searchRef}
         type="search"
-        className="h-full text-xl px-3 py-4 flex-grow bg-stone-50 rounded-l-md outline-none"
+        className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 rounded-l-md outline-none"
         placeholder="Choose city"
       />
       <Button type="submit" search>
