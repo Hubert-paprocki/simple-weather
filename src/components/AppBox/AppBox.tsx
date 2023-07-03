@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CurrentWeather from "./ContainerBox/CurrentWeather/CurrentWeather";
 import { WeatherData } from "../../App";
 
