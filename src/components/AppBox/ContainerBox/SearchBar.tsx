@@ -16,7 +16,11 @@ function SearchBar({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (citySearchRef.current) {
-      fetchWeatherDataWithSearch(citySearchRef.current.value);
+      fetchWeatherDataWithSearch(
+        citySearchRef.current.value
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+      );
       citySearchRef.current.value = "";
     }
   };
@@ -27,7 +31,7 @@ function SearchBar({
         ref={citySearchRef}
         type="search"
         className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 rounded-l-md outline-none"
-        placeholder="Choose city"
+        placeholder="Choose city, country"
       />
       <Button type="button" location onClick={fetchLocationData}>
         <BiCurrentLocation />
