@@ -3,17 +3,20 @@ import Button from "../Buttons";
 import { BiCurrentLocation, BiSearch } from "react-icons/bi";
 
 interface SearchBarProps {
-  readonly fetchWeatherData: (city: string) => void;
+  readonly fetchWeatherDataWithSearch: (city: string) => void;
   readonly fetchLocationData: () => void;
 }
 
-function SearchBar({ fetchWeatherData, fetchLocationData }: SearchBarProps) {
+function SearchBar({
+  fetchWeatherDataWithSearch,
+  fetchLocationData,
+}: SearchBarProps) {
   const citySearchRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (citySearchRef.current) {
-      fetchWeatherData(citySearchRef.current.value);
+      fetchWeatherDataWithSearch(citySearchRef.current.value);
       citySearchRef.current.value = "";
     }
   };

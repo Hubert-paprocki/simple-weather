@@ -59,44 +59,20 @@ function App() {
     return formattedWeatherData;
   };
 
-  const fetchLocationData = async () => {
+  const fetchLocationData = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          try {
-            const { latitude, longitude } = position.coords;
-            const url = `https://geocode.xyz/${latitude},${longitude}?json=1&auth=126206648519120234113x107627&language=en`;
-
-            const response = await fetch(url);
-            if (response.ok) {
-              const data = await response.json();
-
-              fetchWeatherData(data.city);
-            } else {
-              console.error(
-                "Error fetching location data:",
-                response.statusText
-              );
-            }
-          } catch (error) {
-            console.error("Error fetching location data:", error);
-          }
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-        }
-      );
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeatherDataWithGeolocation(latitude, longitude);
+      });
     } else {
       console.error("Geolocation is not supported by this browser");
     }
   };
 
-  const fetchWeatherData = async (city: string) => {
-    const apiKey = process.env.REACT_APP_API_KEY;
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
-
+  const fetchWeatherData = async (url: string) => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(url);
       if (response.ok) {
         const data: WeatherData = await response.json();
         setWeatherData(data);
@@ -112,12 +88,26 @@ function App() {
     }
   };
 
+  const fetchWeatherDataWithSearch = (city: string) => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
+
+    fetchWeatherData(apiUrl);
+  };
+
+  const fetchWeatherDataWithGeolocation = (lat: number, lon: number) => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}`;
+
+    fetchWeatherData(apiUrl);
+  };
+
   const currentWeatherData = formatWeatherData(weatherData);
 
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center gap-y-8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
       <SearchBar
-        fetchWeatherData={fetchWeatherData}
+        fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
         fetchLocationData={fetchLocationData}
       />
       <Appbox currentWeatherData={currentWeatherData} />
