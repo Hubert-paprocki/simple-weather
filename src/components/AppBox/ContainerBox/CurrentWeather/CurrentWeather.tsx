@@ -77,7 +77,7 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
         <div className="flex">
           <p className="text-[5rem] flex items-end mr-6">{weatherIcon}</p>
           <p className="text-6xl">
-            {data?.current.temp_c}
+            {Math.round(data?.current.temp_c ?? 0)}
             <sup className="text-4xl">°C</sup>
           </p>
           <div className="ml-6 mb-5 text-xl font-semibold mt-1.5">
@@ -85,7 +85,7 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
             <p className="text-sm font-normal">
               perceived temp.{" "}
               <span className="font-semibold">
-                {data?.current.feelslike_c}°
+                {Math.round(data?.current.feelslike_c ?? 0)}°
               </span>
             </p>
           </div>
@@ -93,7 +93,7 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
         <p className="mb-5">
           Today {data?.forecast.forecastday.at(0)?.day.condition.text}. The
           maximum temperature will be{" "}
-          {data?.forecast.forecastday.at(0)?.day.maxtemp_c}
+          {Math.round(data?.forecast.forecastday.at(0)?.day.maxtemp_c ?? 0)}
           <sup className="">°C</sup>
         </p>
       </div>
@@ -101,7 +101,7 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
         <div>
           <p className="text-sm">Wind</p>
           <p className="group flex items-center gap-1 font-semibold">
-            {data?.current.wind_kph} km/h
+            {Math.round(data?.current.wind_kph ?? 0)} km/h
             <span className="inline-block relative">
               {compassArw}
               <span className="absolute hidden group-hover:block bg-gray-200 px-2 py-1 text-gray-800 text-xs rounded-md -top-8 -left-1/2 ">

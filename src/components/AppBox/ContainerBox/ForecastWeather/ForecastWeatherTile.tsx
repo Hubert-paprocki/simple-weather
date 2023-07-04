@@ -68,14 +68,14 @@ function ForecastWeatherTile({ data }: ForecastWeatherTileProps) {
   return (
     <div className="w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-3xl text-slate-100 font-semibold px-2">
       <p className="h-full  flex items-center justify-center">
-        {data.day.maxtemp_c}
+        {Math.round(data.day.maxtemp_c ?? 0)}
         <sup className="mt-3">°</sup>
       </p>
       <div className="h-full flex items-center justify-center">
         <p className="text-7xl">{weatherIcon}</p>
       </div>
       <p className="h-full flex items-center justify-center">
-        {data.day.mintemp_c}
+        {Math.round(data.day.mintemp_c ?? 0)}
         <sup className="mt-3">°</sup>
       </p>
     </div>

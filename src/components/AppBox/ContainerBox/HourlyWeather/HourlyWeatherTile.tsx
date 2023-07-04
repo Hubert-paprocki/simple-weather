@@ -14,7 +14,7 @@ function HourlyWeatherTile({ data }: HourlyWeatherTileProps) {
   return (
     <div className="bg-blue-400 rounded-md py-4 px-[1.25rem] text-slate-100 flex flex-col text-center font-semibold text-lg">
       <p>
-        {data.temp_c}
+        {Math.round(data.temp_c)}
         <sup>°</sup>
       </p>
       <div className="text-5xl">{weatherIcon}</div>
