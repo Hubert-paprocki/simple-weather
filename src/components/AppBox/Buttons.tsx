@@ -25,14 +25,14 @@ function Button({
   }
   if (search) {
     classes +=
-      " h-10 text-2xl bg-slate-50 border-l-[3px] px-4 rounded-r-md hover:text-teal-500 hover:bg-teal-50 duration-200";
+      " h-10 text-2xl bg-slate-50 border-l-[3px] px-4 rounded-r-md hover:text-teal-500 hover:bg-teal-50 duration-200 active:duration-50 active:text-teal-400 active:bg-teal-100";
   }
   if (disabled) {
-    classes += " opacity-40 hover:translate-y-0 active:translate-y-0";
+    classes += " bg-slate-500 hover:translate-y-0 active:translate-y-0 ";
   }
   if (location) {
     classes +=
-      "h-10 text-2xl bg-slate-50 border-l-[5px] px-4 hover:text-teal-500 hover:bg-teal-50 duration-200";
+      "h-10 text-2xl bg-slate-50 border-l-[5px] px-4 hover:text-teal-500 hover:bg-teal-50 duration-200 active:duration-50 active:text-teal-400 active:bg-teal-100";
   }
 
   return (
