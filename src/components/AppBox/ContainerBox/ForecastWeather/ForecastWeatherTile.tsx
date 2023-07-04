@@ -9,6 +9,7 @@ interface ForecastWeatherTileProps {
 export function getWeatherIcon(conditionText: string) {
   const iconMap: { [key: string]: React.ReactElement } = {
     Sunny: <Icons.WiDaySunny />,
+    Clear: <Icons.WiDaySunny />,
     "Partly cloudy": <Icons.WiDayCloudy />,
     Cloudy: <Icons.WiCloudy />,
     Overcast: <Icons.WiDaySunnyOvercast />,
