@@ -10,6 +10,8 @@ import {
   Tooltip,
   Filler,
   Legend,
+  ChartOptions,
+  LinearScaleOptions,
 } from "chart.js";
 
 ChartJS.register(
@@ -51,13 +53,13 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
     return acc;
   }, []);
 
-  const options = {
+  const options: ChartOptions<"line"> = {
     responsive: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: "index" as const,
       intersect: false,
     },
-    stacked: false,
     plugins: {
       title: {
         display: false,
@@ -65,12 +67,29 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
       legend: {
         display: false,
       },
+      tooltip: {
+        enabled: true,
+        intersect: false,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        bodyFont: {
+          size: 16,
+        },
+        displayColors: false,
+        callbacks: {
+          title: () => "",
+          label: (context) => `${context.parsed.y}°C`,
+        },
+      },
     },
     scales: {
       y: {
         type: "linear" as const,
         display: true,
         position: "left" as const,
+        ticks: {
+          callback: (value: string | number) => `${value}°C`,
+          stepSize: 1,
+        },
       },
       x: {
         display: true,
@@ -93,8 +112,8 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   };
 
   return (
-    <div className="w-3/4 max-w-5xl bg-slate-50 rounded-md p-7 flex gap-1">
-      <Line options={options} data={chartData} width={15} height={5} />
+    <div className=" bg-slate-50 lg:rounded-md p-7 ">
+      <Line options={options} data={chartData} width={200} height={300} />
     </div>
   );
 }
