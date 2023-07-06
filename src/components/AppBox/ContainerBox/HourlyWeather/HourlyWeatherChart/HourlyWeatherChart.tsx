@@ -84,7 +84,6 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
     datasets: [
       {
         fill: true,
-        label: "24 Hour forecast",
         data: datas,
         borderColor: "#0284c7",
         backgroundColor: "rgba(2, 132, 199, 0.3)",

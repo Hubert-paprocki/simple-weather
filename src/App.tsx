@@ -175,7 +175,7 @@ function App() {
 
   const fetchWeatherDataWithSearch = (city: string) => {
     const apiKey = process.env.REACT_APP_API_KEY;
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no$`;
 
     fetchWeatherData(apiUrl);
   };
@@ -194,7 +194,7 @@ function App() {
     setdisplayHourly(thing);
   };
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center gap-y-8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
+    <div className="h-full md:py-12 min-h-screen w-full flex flex-col items-center justify-center gap-y-8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
       <SearchBar
         fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
         fetchLocationData={fetchLocationData}

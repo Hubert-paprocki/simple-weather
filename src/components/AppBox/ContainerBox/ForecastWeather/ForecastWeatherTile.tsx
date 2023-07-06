@@ -1,6 +1,7 @@
 import React from "react";
 import { WeatherData } from "../../../../App";
 import * as Icons from "react-icons/wi";
+import { weatherBackgroundColor } from "../CurrentWeather/CurrentWeather";
 
 interface ForecastWeatherTileProps {
   data: any;
@@ -66,7 +67,11 @@ function ForecastWeatherTile({ data }: ForecastWeatherTileProps) {
   const weatherIcon = getWeatherIcon(data.day.condition.text);
 
   return (
-    <div className="w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-3xl text-slate-100 font-semibold px-2">
+    <div
+      className={`${weatherBackgroundColor(
+        data.day.condition.text
+      )}w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-3xl text-slate-100 font-semibold px-2`}
+    >
       <p className="h-full  flex items-center justify-center">
         {Math.round(data.day.maxtemp_c ?? 0)}
         <sup className="mt-3">°</sup>

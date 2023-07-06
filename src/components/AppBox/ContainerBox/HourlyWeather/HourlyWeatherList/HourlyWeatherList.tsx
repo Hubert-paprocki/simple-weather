@@ -43,7 +43,6 @@ function HourlyWeatherList({ data }: HourlyWeatherListProps) {
         {[...hourlyData, ...hourlyData2].reduce((acc, hour, i) => {
           const hourDate = new Date(hour.time);
           if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-            console.log(i, hour);
             acc.push(<HourlyWeatherTile key={i} data={hour} />);
           }
           return acc;
