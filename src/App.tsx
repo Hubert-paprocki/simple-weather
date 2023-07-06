@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Appbox from "./components/AppBox/AppBox";
 import SearchBar from "./components/AppBox/ContainerBox/SearchBar";
-import HourlyWeatherList from "./components/AppBox/ContainerBox/HourlyWeather/HourlyWeatherList";
+import HourlyWeatherList from "./components/AppBox/ContainerBox/HourlyWeather/HourlyWeatherList/HourlyWeatherList";
+import HourlyWeatherListSwitch from "./components/AppBox/HourlyWeatherSwitch";
+import HourlyWeatherChart from "./components/AppBox/ContainerBox/HourlyWeather/HourlyWeatherChart/HourlyWeatherChart";
 
 export interface LocationData {
   name: string;
@@ -107,6 +109,7 @@ export interface WeatherData {
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [displayHourly, setdisplayHourly] = useState<string>("tile");
   const days = 14;
 
   const formatWeatherData = (weatherData: WeatherData | null) => {
@@ -187,6 +190,9 @@ function App() {
   const currentWeatherData = formatWeatherData(weatherData);
   const forecastWeatherData = formatWeatherData(weatherData);
 
+  const displayHourlySwitch = (thing: string) => {
+    setdisplayHourly(thing);
+  };
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center gap-y-8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
       <SearchBar
@@ -197,7 +203,15 @@ function App() {
         currentWeatherData={currentWeatherData}
         forecastWeatherData={forecastWeatherData}
       />
-      <HourlyWeatherList data={forecastWeatherData} />
+      {displayHourly === "tile" ? (
+        <HourlyWeatherList data={forecastWeatherData} />
+      ) : (
+        <HourlyWeatherChart data={forecastWeatherData} />
+      )}
+      <HourlyWeatherListSwitch
+        displayHourlySwitch={displayHourlySwitch}
+        activeBtn={displayHourly}
+      />
     </div>
   );
 }
