@@ -40,15 +40,14 @@ function HourlyWeatherList({ data }: HourlyWeatherListProps) {
         className="flex gap-3 overflow-x-hidden p-1"
         ref={scrollContainerRef}
       >
-        {[...hourlyData, ...hourlyData2]
-          .filter((hour) => {
-            const hourDate = new Date(hour.time);
-            return hourDate >= oneHourBefore && hourDate <= dayAhead;
-          })
-          .map((hour, i) => {
+        {[...hourlyData, ...hourlyData2].reduce((acc, hour, i) => {
+          const hourDate = new Date(hour.time);
+          if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
             console.log(i, hour);
-            return <HourlyWeatherTile key={i} data={hour} />;
-          })}
+            acc.push(<HourlyWeatherTile key={i} data={hour} />);
+          }
+          return acc;
+        }, [])}
       </div>
       <Button onClick={() => scroll("right")}>
         <p className="text-3xl">

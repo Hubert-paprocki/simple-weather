@@ -35,20 +35,21 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);
   const dayAhead = new Date(userDate.getTime() + 24 * 60 * 60 * 1000);
 
-  const labels = [...hourlyData, ...hourlyData2]
-    .filter((hour) => {
-      const hourDate = new Date(hour.time);
-      return hourDate >= oneHourBefore && hourDate <= dayAhead;
-    })
-    .map((hour) => hour.time.substring(10, 16));
+  const labels = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
+    const hourDate = new Date(hour.time);
+    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+      acc.push(hour.time.substring(10, 16));
+    }
+    return acc;
+  }, []);
 
-  console.log(`lab`, labels);
-  const datas = [...hourlyData, ...hourlyData2]
-    .filter((hour) => {
-      const hourDate = new Date(hour.time);
-      return hourDate >= oneHourBefore && hourDate <= dayAhead;
-    })
-    .map((hour) => hour.temp_c);
+  const datas = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
+    const hourDate = new Date(hour.time);
+    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+      acc.push(hour.temp_c);
+    }
+    return acc;
+  }, []);
 
   const options = {
     responsive: true,
