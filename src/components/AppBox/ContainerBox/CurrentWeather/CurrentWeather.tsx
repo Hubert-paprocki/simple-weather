@@ -12,29 +12,28 @@ import {
 } from "react-icons/md";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { getWeatherIcon } from "../ForecastWeather/ForecastWeatherTile";
+
 interface CurrentWeatherProps {
-  readonly data: WeatherData | null;
+  data: WeatherData | null;
 }
 
-function CurrentWeather({ data }: CurrentWeatherProps) {
-  let weatherClasses = "bg-stone-400";
-  let compassArw;
-  if (
-    data?.current.condition.text &&
-    /partly cloudy/i.test(data.current.condition.text)
-  ) {
-    weatherClasses = "bg-gradient-to-br from-blue-600/80 to-teal-400/70";
-  } else if (
-    data?.current.condition.text &&
-    /(sunny|cloudy|rain|snow)/i.test(data.current.condition.text)
-  ) {
-    weatherClasses = "bg-gradient-to-br from-sky-600/80 to-cyan-300/70";
-  } else if (
-    data?.current.condition.text &&
-    /clear/i.test(data.current.condition.text)
-  ) {
-    weatherClasses = "bg-gradient-to-br from-sky-700/80 to-cyan-500/70";
+export const weatherBackgroundColor = (
+  weatherCondition: string | undefined
+) => {
+  if (weatherCondition && /partly cloudy/i.test(weatherCondition)) {
+    return "bg-gradient-to-br from-blue-700/80 to-teal-600/70";
+  } else if (weatherCondition && /(rain|snow)/i.test(weatherCondition)) {
+    return "bg-gradient-to-br from-gray-700/80 to-sky-600/70";
+  } else if (weatherCondition && /clear|sunny/i.test(weatherCondition)) {
+    return "bg-gradient-to-br from-sky-600/80 to-cyan-500/70";
+  } else if (weatherCondition && /cloudy/i.test(weatherCondition)) {
+    return "bg-gradient-to-br from-gray-800/50 to-sky-700/40";
   }
+  return "bg-stone-400";
+};
+
+function CurrentWeather({ data }: CurrentWeatherProps) {
+  let compassArw;
 
   const windDirections = [
     { direction: "WSW", icon: <MdSouthWest /> },
@@ -67,7 +66,9 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
 
   return (
     <div
-      className={`p-3 rounded-md text-slate-100 min-w-[60%] ${weatherClasses}`}
+      className={`p-3 rounded-md text-slate-100 min-w-[60%] ${weatherBackgroundColor(
+        data?.current.condition.text
+      )}`}
     >
       <div className="pb-3">
         <h2 className="font-semibold">Current weather</h2>
@@ -91,9 +92,9 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
           </div>
         </div>
         <p className="mb-5">
-          Today {data?.forecast.forecastday.at(0)?.day.condition.text}. The
-          maximum temperature will be{" "}
-          {Math.round(data?.forecast.forecastday.at(0)?.day.maxtemp_c ?? 0)}
+          Today {data?.forecast.forecastday[0]?.day.condition.text}. The maximum
+          temperature will be{" "}
+          {Math.round(data?.forecast.forecastday[0]?.day.maxtemp_c ?? 0)}
           <sup className="">°C</sup>
         </p>
       </div>
@@ -124,14 +125,14 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
         <div>
           <p className="text-sm">Chance of rain</p>
           <p className="font-semibold">
-            {data?.forecast.forecastday.at(0)?.day.daily_chance_of_rain}%
+            {data?.forecast.forecastday[0]?.day.daily_chance_of_rain}%
           </p>
         </div>
         <div className="">
           {" "}
           <p className="text-sm">UV index max.</p>
           <p className="font-semibold">
-            {data?.forecast.forecastday.at(0)?.day.uv}
+            {data?.forecast.forecastday[0]?.day.uv}
           </p>
         </div>
       </div>
