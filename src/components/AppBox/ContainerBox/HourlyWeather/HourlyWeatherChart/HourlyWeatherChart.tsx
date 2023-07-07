@@ -37,21 +37,38 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);
   const dayAhead = new Date(userDate.getTime() + 24 * 60 * 60 * 1000);
 
-  const labels = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
-    const hourDate = new Date(hour.time);
-    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-      acc.push(hour.time.substring(10, 16));
-    }
-    return acc;
-  }, []);
+  const hourlyWeatherLabels = [...hourlyData, ...hourlyData2].reduce(
+    (acc, hour) => {
+      const hourDate = new Date(hour.time);
+      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+        acc.push(hour.time.substring(10, 16));
+      }
+      return acc;
+    },
+    []
+  );
 
-  const datas = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
-    const hourDate = new Date(hour.time);
-    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-      acc.push(hour.temp_c);
-    }
-    return acc;
-  }, []);
+  const hourlyWeatherTemp = [...hourlyData, ...hourlyData2].reduce(
+    (acc, hour) => {
+      const hourDate = new Date(hour.time);
+      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+        acc.push(hour.temp_c);
+      }
+      return acc;
+    },
+    []
+  );
+
+  const hourlyWeatherCondition = [...hourlyData, ...hourlyData2].reduce(
+    (acc, hour) => {
+      const hourDate = new Date(hour.time);
+      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+        acc.push(hour.condition.text.toUpperCase());
+      }
+      return acc;
+    },
+    []
+  );
 
   const options: ChartOptions<"line"> = {
     responsive: true,
@@ -74,9 +91,15 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
         bodyFont: {
           size: 16,
         },
+        titleFont: {
+          size: 16.5,
+        },
         displayColors: false,
         callbacks: {
-          title: () => "",
+          title: (tooltipItems) => {
+            const index = tooltipItems[0].dataIndex;
+            return hourlyWeatherCondition[index];
+          },
           label: (context) => `${context.parsed.y}°C`,
         },
       },
@@ -94,16 +117,23 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
       x: {
         display: true,
         position: "left" as const,
+        ticks: {
+          display: true,
+          font: {},
+          padding: 0,
+          maxRotation: 27,
+          minRotation: 0,
+        },
       },
     },
   };
 
   const chartData = {
-    labels,
+    hourlyWeatherLabels,
     datasets: [
       {
         fill: true,
-        data: datas,
+        data: hourlyWeatherTemp,
         borderColor: "#0284c7",
         backgroundColor: "rgba(2, 132, 199, 0.3)",
         yAxisID: "y",

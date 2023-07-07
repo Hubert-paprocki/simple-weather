@@ -30,7 +30,7 @@ function Button({
       "px-5 py-2 bg-yellow-800 bg-opacity-20 rounded-bl-lg rounded-tl-lg rounded-br-lg rounded-tr-lg duration-200 border-r-4 border-l-4 border-stone-800 text-stone-300 hover:text-stone-50 md:min-w-[217px] hover:min-w-[250px] uppercase tracking-wider";
   }
   if (search) {
-    classes = `h-10 text-2xl bg-slate-50 border-l-[3px] px-4 rounded-r-md ${active}`;
+    classes = `h-10 text-2xl bg-slate-50 border-l-[3px] px-4 lg:rounded-r-md ${active}`;
   }
   if (disabled) {
     classes =

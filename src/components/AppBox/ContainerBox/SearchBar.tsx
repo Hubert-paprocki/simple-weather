@@ -26,11 +26,11 @@ function SearchBar({
   };
 
   return (
-    <form className="w-3/4 max-w-5xl flex h-10" onSubmit={handleSubmit}>
+    <form className="flex h-10" onSubmit={handleSubmit}>
       <input
         ref={citySearchRef}
         type="search"
-        className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 rounded-l-md outline-none"
+        className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 lg:rounded-l-md outline-none"
         placeholder="Choose city, country"
       />
       <Button type="button" location onClick={fetchLocationData}>

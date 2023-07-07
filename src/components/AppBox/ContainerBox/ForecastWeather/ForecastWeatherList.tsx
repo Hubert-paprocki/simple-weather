@@ -24,7 +24,7 @@ function ForecastWeatherList({ data }: ForecastWeatherListProps) {
   };
 
   return (
-    <div className="flex text-center overflow-hidden w-full gap-1 ml-6">
+    <div className="flex text-center overflow-hidden w-full gap-1 lg:ml-6">
       <Button onClick={() => scroll("left")}>
         <p className="text-3xl">
           <HiOutlineChevronLeft />

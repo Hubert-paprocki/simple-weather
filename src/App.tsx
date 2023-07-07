@@ -194,24 +194,26 @@ function App() {
     setdisplayHourly(thing);
   };
   return (
-    <div className="h-full md:py-12 min-h-screen w-full flex flex-col items-center justify-center gap-y-8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
-      <SearchBar
-        fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
-        fetchLocationData={fetchLocationData}
-      />
-      <Appbox
-        currentWeatherData={currentWeatherData}
-        forecastWeatherData={forecastWeatherData}
-      />
-      {displayHourly === "tile" ? (
-        <HourlyWeatherList data={forecastWeatherData} />
-      ) : (
-        <HourlyWeatherChart data={forecastWeatherData} />
-      )}
-      <HourlyWeatherListSwitch
-        displayHourlySwitch={displayHourlySwitch}
-        activeBtn={displayHourly}
-      />
+    <div className="h-full min-h-screen w-full flex flex-col lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
+      <div className="flex flex-col max-w-5xl w-full gap-y-8">
+        <SearchBar
+          fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
+          fetchLocationData={fetchLocationData}
+        />
+        <Appbox
+          currentWeatherData={currentWeatherData}
+          forecastWeatherData={forecastWeatherData}
+        />
+        {displayHourly === "tile" ? (
+          <HourlyWeatherList data={forecastWeatherData} />
+        ) : (
+          <HourlyWeatherChart data={forecastWeatherData} />
+        )}
+        <HourlyWeatherListSwitch
+          displayHourlySwitch={displayHourlySwitch}
+          activeBtn={displayHourly}
+        />
+      </div>
     </div>
   );
 }

@@ -11,7 +11,7 @@ function HourlyWeatherSwitch({
   activeBtn,
 }: HourlyWeatherSwitchProps) {
   return (
-    <div className="bg-slate-200 rounded-md flex gap-1.5">
+    <div className="bg-slate-200 rounded-md flex gap-1.5 self-center">
       <Button
         onClick={() => {
           displayHourlySwitch("chart");

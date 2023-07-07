@@ -10,14 +10,14 @@ interface AppboxProps {
 
 function Appbox({ currentWeatherData, forecastWeatherData }: AppboxProps) {
   return (
-    <div className="w-3/4 max-w-5xl bg-slate-50 rounded-md p-7 flex flex-col">
+    <div className=" bg-slate-50 lg:rounded-md p-7 flex flex-col">
       {currentWeatherData && (
         <p className="mb-2 ml-1 text-xl">
           {currentWeatherData.location.name},{" "}
           {currentWeatherData.location.country}
         </p>
       )}
-      <div className="flex">
+      <div className="flex flex-col gap-y-6 lg:flex-row">
         <CurrentWeather data={currentWeatherData} />
         {currentWeatherData && (
           <ForecastWeatherList data={forecastWeatherData} />

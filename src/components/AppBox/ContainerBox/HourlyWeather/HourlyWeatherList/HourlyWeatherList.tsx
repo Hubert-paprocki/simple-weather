@@ -30,7 +30,7 @@ function HourlyWeatherList({ data }: HourlyWeatherListProps) {
   };
 
   return (
-    <div className="w-3/4 max-w-5xl bg-slate-50 rounded-md p-7 flex gap-1">
+    <div className=" bg-slate-50 lg:rounded-md p-7 flex gap-1">
       <Button onClick={() => scroll("left")}>
         <p className="text-3xl">
           <HiOutlineChevronLeft />
