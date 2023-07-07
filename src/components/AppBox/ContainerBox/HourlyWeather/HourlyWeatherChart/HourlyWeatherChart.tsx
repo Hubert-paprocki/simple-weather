@@ -37,22 +37,20 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);
   const dayAhead = new Date(userDate.getTime() + 24 * 60 * 60 * 1000);
 
-  const hourlyWeatherLabels = [...hourlyData, ...hourlyData2].reduce(
-    (acc, hour) => {
-      const hourDate = new Date(hour.time);
-      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-        acc.push(hour.time.substring(10, 16));
-      }
-      return acc;
-    },
-    []
-  );
+  const labels = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
+    const hourDate = new Date(hour.time);
+    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
+      acc.push(hour.time.substring(10, 16));
+    }
+    return acc;
+  }, []);
 
   const hourlyWeatherTemp = [...hourlyData, ...hourlyData2].reduce(
     (acc, hour) => {
       const hourDate = new Date(hour.time);
       if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-        acc.push(hour.temp_c);
+        const roundedTemp = Math.round(hour.temp_c * 2) / 2;
+        acc.push(roundedTemp);
       }
       return acc;
     },
@@ -92,7 +90,7 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
           size: 16,
         },
         titleFont: {
-          size: 16.5,
+          size: 16,
         },
         displayColors: false,
         callbacks: {
@@ -129,12 +127,12 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   };
 
   const chartData = {
-    hourlyWeatherLabels,
+    labels,
     datasets: [
       {
         fill: true,
         data: hourlyWeatherTemp,
-        borderColor: "#0284c7",
+        borderColor: "rgba(2, 132, 199, 0.8)",
         backgroundColor: "rgba(2, 132, 199, 0.3)",
         yAxisID: "y",
       },
