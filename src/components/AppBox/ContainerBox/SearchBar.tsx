@@ -30,7 +30,7 @@ function SearchBar({
       <input
         ref={citySearchRef}
         type="search"
-        className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 lg:rounded-l-md outline-none"
+        className="h-full text-xl px-3 py-4 flex-grow bg-slate-50 lg:rounded-l-md outline-none text-stone-700/80 placeholder:text-stone-700/40"
         placeholder="Choose city, country"
       />
       <Button type="button" location onClick={fetchLocationData}>

@@ -194,7 +194,7 @@ function App() {
     setdisplayHourly(thing);
   };
   return (
-    <div className="h-full min-h-screen w-full flex flex-col lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200">
+    <div className="h-full min-h-screen w-full flex flex-col lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200 font-roboto">
       <div className="flex flex-col max-w-5xl w-full gap-y-8">
         <SearchBar
           fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
