@@ -61,7 +61,7 @@ interface ForecastDay {
   hour: [];
 }
 
-interface Hour {
+export interface Hour {
   time: string;
   temp_c: number;
   temp_f: number;
@@ -78,7 +78,7 @@ export interface WeatherData {
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [displayHourly, setdisplayHourly] = useState<string>("tile");
+  const [displayHourly, setDisplayHourly] = useState<string>("tile");
   const days = 14;
 
   const fetchLocationData = () => {
@@ -98,7 +98,6 @@ function App() {
       if (response.ok) {
         const data: WeatherData = await response.json();
         setWeatherData(data);
-        console.log(data);
       } else {
         console.error(
           "Failed to fetch weather data:",
@@ -125,9 +124,10 @@ function App() {
     fetchWeatherData(apiUrl);
   };
 
-  const displayHourlySwitch = (thing: string) => {
-    setdisplayHourly(thing);
+  const displayHourlySwitch = (option: string) => {
+    setDisplayHourly(option);
   };
+
   return (
     <div className="h-full min-h-screen w-full flex flex-col lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200 font-roboto">
       <div className="flex flex-col max-w-5xl w-full gap-y-8">
