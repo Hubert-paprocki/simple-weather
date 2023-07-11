@@ -13,6 +13,7 @@ import {
   Legend,
   ChartOptions,
 } from "chart.js";
+import { HourlyWeatherData } from "../HourlyWeatherList/HourlyWeatherList";
 
 ChartJS.register(
   CategoryScale,
@@ -30,49 +31,38 @@ interface HourlyWeatherChartProps {
 }
 
 function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
-  const hourlyData: Array<any> = data?.forecastday[0]?.hour || [];
-  const hourlyData2: Array<any> = data?.forecastday[1]?.hour || [];
+  const hourlyWeatherData: HourlyWeatherData[] = [
+    ...(data?.forecastday[0]?.hour || []),
+    ...(data?.forecastday[1]?.hour || []),
+  ];
 
   const userDate = new Date();
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);
   const dayAhead = new Date(userDate.getTime() + 24 * 60 * 60 * 1000);
 
-  const labels = [...hourlyData, ...hourlyData2].reduce((acc, hour) => {
-    const hourDate = new Date(hour.time);
-    if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-      acc.push(hour.time.substring(10, 16));
-    }
-    return acc;
-  }, []);
+  const filteredData = hourlyWeatherData.filter((byTheHour) => {
+    const hourDate = new Date(byTheHour.time);
+    return hourDate >= oneHourBefore && hourDate <= dayAhead;
+  });
 
-  const hourlyWeatherTemp = [...hourlyData, ...hourlyData2].reduce(
-    (acc, hour) => {
-      const hourDate = new Date(hour.time);
-      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-        const roundedTemp = Math.round(hour.temp_c * 2) / 2;
-        acc.push(roundedTemp);
-      }
-      return acc;
-    },
-    []
+  const labels = filteredData.map((byTheHour) =>
+    byTheHour.time.substring(10, 16)
   );
 
-  const hourlyWeatherCondition = [...hourlyData, ...hourlyData2].reduce(
-    (acc, hour) => {
-      const hourDate = new Date(hour.time);
-      if (hourDate >= oneHourBefore && hourDate <= dayAhead) {
-        acc.push(hour.condition.text.toUpperCase());
-      }
-      return acc;
-    },
-    []
+  const roundedTemperature = (temp: number) => Math.round(temp * 2) / 2;
+  const hourlyWeatherTemp = filteredData.map((byTheHour) =>
+    roundedTemperature(byTheHour.temp_c)
+  );
+
+  const hourlyWeatherCondition = filteredData.map((byTheHour) =>
+    byTheHour.condition.text.toUpperCase()
   );
 
   const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     interaction: {
-      mode: "index" as const,
+      mode: "index",
       intersect: false,
     },
     plugins: {
@@ -94,19 +84,17 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
         },
         displayColors: false,
         callbacks: {
-          title: (tooltipItems) => {
-            const index = tooltipItems[0].dataIndex;
-            return hourlyWeatherCondition[index];
-          },
+          title: (tooltipItems) =>
+            hourlyWeatherCondition[tooltipItems[0].dataIndex],
           label: (context) => `${context.parsed.y}°C`,
         },
       },
     },
     scales: {
       y: {
-        type: "linear" as const,
+        type: "linear",
         display: true,
-        position: "left" as const,
+        position: "left",
         ticks: {
           callback: (value: string | number) => `${value}°C`,
           stepSize: 1,
@@ -114,7 +102,7 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
       },
       x: {
         display: true,
-        position: "left" as const,
+        position: "left",
         ticks: {
           display: true,
           font: {},
@@ -140,7 +128,7 @@ function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
   };
 
   return (
-    <div className=" bg-slate-50 lg:rounded-md p-7 ">
+    <div className="bg-slate-50 lg:rounded-md p-7">
       <Line options={options} data={chartData} width={200} height={300} />
     </div>
   );
