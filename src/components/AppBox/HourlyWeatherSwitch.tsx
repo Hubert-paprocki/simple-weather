@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Buttons";
+import Button from "../Buttons/Buttons";
 
 interface HourlyWeatherSwitchProps {
   displayHourlySwitch: (thing: string) => void;

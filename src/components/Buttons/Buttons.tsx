@@ -26,8 +26,7 @@ function Button({
   let active =
     "hover:text-teal-500 hover:bg-teal-50 duration-200 active:duration-50 active:text-teal-400 active:bg-teal-100";
   if (primary) {
-    classes =
-      "px-5 py-2 bg-yellow-800 bg-opacity-20 rounded-bl-lg rounded-tl-lg rounded-br-lg rounded-tr-lg duration-200 border-r-4 border-l-4 border-stone-800 text-stone-300 hover:text-stone-50 md:min-w-[217px] hover:min-w-[250px] uppercase tracking-wider";
+    classes = "";
   }
   if (search) {
     classes = `text-stone-700/80 h-10 text-2xl bg-slate-50 border-l-[3px] px-4 lg:rounded-r-md ${active}`;

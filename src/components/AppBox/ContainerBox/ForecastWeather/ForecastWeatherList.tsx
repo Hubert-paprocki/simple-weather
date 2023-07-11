@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import ForecastWeatherTile from "../ForecastWeather/ForecastWeatherTile";
 import { ForecastWeatherData } from "../../../../App";
-import Button from "../../Buttons";
+import Button from "../../../Buttons/Buttons";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 interface ForecastWeatherListProps {

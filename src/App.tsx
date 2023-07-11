@@ -129,8 +129,8 @@ function App() {
   };
 
   return (
-    <div className="h-full min-h-screen w-full flex flex-col lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200 font-roboto">
-      <div className="flex flex-col max-w-5xl w-full gap-y-8">
+    <div className="h-full min-h-screen w-full flex flex-col small:justify-normal lg:items-center lg:justify-center 8 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-200 via-indigo-200 to-sky-200 font-roboto">
+      <div className="flex flex-col max-w-5xl w-full small:gap-y-0  medium:gap-y-2 tall:gap-y-6  taller:gap-y-8 ">
         <SearchBar
           fetchWeatherDataWithSearch={fetchWeatherDataWithSearch}
           fetchLocationData={fetchLocationData}

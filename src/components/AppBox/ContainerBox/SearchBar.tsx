@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import Button from "../Buttons";
+import Button from "../../Buttons/Buttons";
 import { BiCurrentLocation, BiSearch } from "react-icons/bi";
-import Input from "./Inputs";
+import Input from "../Inputs/Inputs";
 
 interface SearchBarProps {
   readonly fetchWeatherDataWithSearch: (city: string) => void;

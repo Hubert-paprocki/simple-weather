@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import HourlyWeatherTile from "./HourlyWeatherTile";
-import Button from "../../../Buttons";
+import Button from "../../../../Buttons/Buttons";
 import { ForecastWeatherData } from "../../../../../App";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
