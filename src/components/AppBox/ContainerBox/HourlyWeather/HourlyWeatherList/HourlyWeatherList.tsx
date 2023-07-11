@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
 import HourlyWeatherTile from "./HourlyWeatherTile";
 import Button from "../../../Buttons";
-import { WeatherData } from "../../../../../App";
+import { ForecastWeatherData } from "../../../../../App";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 interface HourlyWeatherListProps {
-  data: WeatherData | null;
+  data: ForecastWeatherData | undefined;
 }
 
 function HourlyWeatherList({ data }: HourlyWeatherListProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const hourlyData: Array<any> = data?.forecast.forecastday[0]?.hour || [];
-  const hourlyData2: Array<any> = data?.forecast.forecastday[1]?.hour || [];
+  const hourlyData: Array<any> = data?.forecastday[0]?.hour || [];
+  const hourlyData2: Array<any> = data?.forecastday[1]?.hour || [];
 
   const userDate = new Date();
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);

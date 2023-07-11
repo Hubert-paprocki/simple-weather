@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { ForecastWeatherData } from "../../../../../App";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +12,6 @@ import {
   Filler,
   Legend,
   ChartOptions,
-  LinearScaleOptions,
 } from "chart.js";
 
 ChartJS.register(
@@ -26,12 +26,12 @@ ChartJS.register(
 );
 
 interface HourlyWeatherChartProps {
-  data: any;
+  data: ForecastWeatherData | undefined;
 }
 
 function HourlyWeatherChart({ data }: HourlyWeatherChartProps) {
-  const hourlyData: Array<any> = data?.forecast.forecastday[0]?.hour || [];
-  const hourlyData2: Array<any> = data?.forecast.forecastday[1]?.hour || [];
+  const hourlyData: Array<any> = data?.forecastday[0]?.hour || [];
+  const hourlyData2: Array<any> = data?.forecastday[1]?.hour || [];
 
   const userDate = new Date();
   const oneHourBefore = new Date(userDate.getTime() - 60 * 60 * 1000);

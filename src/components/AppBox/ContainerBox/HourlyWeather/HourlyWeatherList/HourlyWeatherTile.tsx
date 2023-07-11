@@ -2,12 +2,20 @@ import React from "react";
 import { getWeatherIcon } from "../../ForecastWeather/ForecastWeatherTile";
 import { weatherBackgroundColor } from "../../CurrentWeather/CurrentWeather";
 
+interface MappedHourlyWeatherData {
+  condition: {
+    text: string;
+  };
+  temp_c: number;
+  temp_f: number;
+  time: string;
+}
 interface HourlyWeatherTileProps {
-  data: any;
+  data: MappedHourlyWeatherData;
 }
 
 function HourlyWeatherTile({ data }: HourlyWeatherTileProps) {
-  let weatherIcon = null;
+  let weatherIcon;
 
   if (data && data.condition && data.condition.text) {
     weatherIcon = getWeatherIcon(data.condition.text);

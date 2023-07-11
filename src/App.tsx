@@ -5,7 +5,7 @@ import HourlyWeatherList from "./components/AppBox/ContainerBox/HourlyWeather/Ho
 import HourlyWeatherListSwitch from "./components/AppBox/HourlyWeatherSwitch";
 import HourlyWeatherChart from "./components/AppBox/ContainerBox/HourlyWeather/HourlyWeatherChart/HourlyWeatherChart";
 
-export interface LocationData {
+interface LocationData {
   name: string;
   country: string;
 }
@@ -25,7 +25,7 @@ interface CurrentWeatherData {
   };
 }
 
-interface ForecastWeatherData {
+export interface ForecastWeatherData {
   forecastday: ForecastDay[];
 }
 
@@ -61,7 +61,7 @@ interface ForecastDay {
   hour: [];
 }
 
-export interface Hour {
+interface Hour {
   time: string;
   temp_c: number;
   temp_f: number;
@@ -80,37 +80,6 @@ function App() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [displayHourly, setdisplayHourly] = useState<string>("tile");
   const days = 14;
-
-  const formatWeatherData = (weatherData: WeatherData | null) => {
-    if (!weatherData) return null;
-
-    const { location, current, forecast } = weatherData;
-    const formattedWeatherData: WeatherData = {
-      location: {
-        name: location.name,
-        country: location.country,
-      },
-      current: {
-        temp_c: current.temp_c,
-        temp_f: current.temp_f,
-        wind_mph: current.wind_mph,
-        wind_kph: current.wind_kph,
-        feelslike_c: current.feelslike_c,
-        feelslike_f: current.feelslike_f,
-        wind_dir: current.wind_dir,
-        humidity: current.humidity,
-        gust_kph: current.gust_kph,
-        condition: {
-          text: current.condition.text,
-        },
-      },
-      forecast: {
-        forecastday: forecast.forecastday,
-      },
-    };
-
-    return formattedWeatherData;
-  };
 
   const fetchLocationData = () => {
     if (navigator.geolocation) {
@@ -156,9 +125,6 @@ function App() {
     fetchWeatherData(apiUrl);
   };
 
-  const currentWeatherData = formatWeatherData(weatherData);
-  const forecastWeatherData = formatWeatherData(weatherData);
-
   const displayHourlySwitch = (thing: string) => {
     setdisplayHourly(thing);
   };
@@ -170,13 +136,13 @@ function App() {
           fetchLocationData={fetchLocationData}
         />
         <Appbox
-          currentWeatherData={currentWeatherData}
-          forecastWeatherData={forecastWeatherData}
+          currentWeatherData={weatherData}
+          forecastWeatherData={weatherData?.forecast}
         />
         {displayHourly === "tile" ? (
-          <HourlyWeatherList data={forecastWeatherData} />
+          <HourlyWeatherList data={weatherData?.forecast} />
         ) : (
-          <HourlyWeatherChart data={forecastWeatherData} />
+          <HourlyWeatherChart data={weatherData?.forecast} />
         )}
         <HourlyWeatherListSwitch
           displayHourlySwitch={displayHourlySwitch}

@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import ForecastWeatherTile from "../ForecastWeather/ForecastWeatherTile";
-import { WeatherData } from "../../../../App";
+import { ForecastWeatherData } from "../../../../App";
 import Button from "../../Buttons";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 interface ForecastWeatherListProps {
-  data: WeatherData;
+  data: ForecastWeatherData | undefined;
 }
 
 function ForecastWeatherList({ data }: ForecastWeatherListProps) {
@@ -31,9 +31,12 @@ function ForecastWeatherList({ data }: ForecastWeatherListProps) {
         </p>
       </Button>
       <div className="flex gap-3 overflow-x-hidden " ref={scrollContainerRef}>
-        {data?.forecast.forecastday.slice(1).map((item, index) => (
-          <ForecastWeatherTile key={index} data={item} />
-        ))}
+        {data &&
+          data.forecastday
+            .slice(1)
+            .map((item, index) => (
+              <ForecastWeatherTile key={index} data={item} />
+            ))}
       </div>
       <Button onClick={() => scroll("right")}>
         <p className="text-3xl">

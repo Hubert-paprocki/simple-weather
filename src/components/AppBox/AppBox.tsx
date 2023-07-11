@@ -1,11 +1,11 @@
 import React from "react";
 import CurrentWeather from "./ContainerBox/CurrentWeather/CurrentWeather";
-import { WeatherData } from "../../App";
+import { ForecastWeatherData, WeatherData } from "../../App";
 import ForecastWeatherList from "./ContainerBox/ForecastWeather/ForecastWeatherList";
 
 interface AppboxProps {
   currentWeatherData: WeatherData | null;
-  forecastWeatherData: any;
+  forecastWeatherData: ForecastWeatherData | undefined;
 }
 
 function Appbox({ currentWeatherData, forecastWeatherData }: AppboxProps) {

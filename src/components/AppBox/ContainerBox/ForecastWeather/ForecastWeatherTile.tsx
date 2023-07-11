@@ -1,10 +1,25 @@
 import React from "react";
-import { WeatherData } from "../../../../App";
 import * as Icons from "react-icons/wi";
 import { weatherBackgroundColor } from "../CurrentWeather/CurrentWeather";
 
+interface MappedForecastWeatherData {
+  date: string;
+  day: {
+    avghumidity: number;
+    avgtemp_c: number;
+    avgtemp_f: number;
+    condition: {
+      text: string;
+    };
+    maxtemp_c: number;
+    maxtemp_f: number;
+    mintemp_c: number;
+    mintemp_f: number;
+  };
+}
+
 interface ForecastWeatherTileProps {
-  data: any;
+  data: MappedForecastWeatherData;
 }
 
 export function getWeatherIcon(conditionText: string) {
@@ -62,6 +77,7 @@ export function getWeatherIcon(conditionText: string) {
 
   return iconMap[conditionText] || null;
 }
+
 function ForecastWeatherTile({ data }: ForecastWeatherTileProps) {
   const weatherIcon = getWeatherIcon(data.day.condition.text);
   const convertedDateStr = data.date.substring(5).split("-");
