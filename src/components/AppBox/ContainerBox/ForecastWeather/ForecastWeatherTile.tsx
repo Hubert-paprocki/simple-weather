@@ -62,27 +62,31 @@ export function getWeatherIcon(conditionText: string) {
 
   return iconMap[conditionText] || null;
 }
-
 function ForecastWeatherTile({ data }: ForecastWeatherTileProps) {
   const weatherIcon = getWeatherIcon(data.day.condition.text);
-
+  const convertedDateStr = data.date.substring(5).split("-");
   return (
-    <div
-      className={`${weatherBackgroundColor(
-        data.day.condition.text
-      )}w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-3xl text-slate-100 font-semibold px-2`}
-    >
-      <p className="h-full  flex items-center justify-center">
-        {Math.round(data.day.maxtemp_c ?? 0)}
-        <sup className="mt-3">°</sup>
+    <div className="flex flex-col">
+      <p className="mb-2 ml-1 text-xl text-stone-700/80 font-medium">
+        {`${convertedDateStr[1]}.${convertedDateStr[0]}`}
       </p>
-      <div className="h-full flex items-center justify-center">
-        <p className="text-7xl">{weatherIcon}</p>
+      <div
+        className={`${weatherBackgroundColor(
+          data.day.condition.text
+        )}w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-3xl text-slate-100 font-semibold px-2`}
+      >
+        <p className="h-full  flex items-center justify-center">
+          {Math.round(data.day.maxtemp_c ?? 0)}
+          <sup className="mt-3">°</sup>
+        </p>
+        <div className="h-full flex items-center justify-center">
+          <p className="text-7xl">{weatherIcon}</p>
+        </div>
+        <p className="h-full flex items-center justify-center">
+          {Math.round(data.day.mintemp_c ?? 0)}
+          <sup className="mt-3">°</sup>
+        </p>
       </div>
-      <p className="h-full flex items-center justify-center">
-        {Math.round(data.day.mintemp_c ?? 0)}
-        <sup className="mt-3">°</sup>
-      </p>
     </div>
   );
 }
