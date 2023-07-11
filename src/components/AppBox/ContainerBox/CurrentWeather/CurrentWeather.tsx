@@ -34,29 +34,64 @@ export const weatherBackgroundColor = (
 
 function CurrentWeather({ data }: CurrentWeatherProps) {
   let compassArw;
-
+  let windDirName;
   const windDirections = [
-    { direction: "WSW", icon: <MdSouthWest /> },
-    { direction: "SW", icon: <MdSouthWest /> },
-    { direction: "SSW", icon: <MdSouthWest /> },
-    { direction: "S", icon: <MdSouth /> },
-    { direction: "SSE", icon: <MdSouthEast /> },
-    { direction: "SE", icon: <MdSouthEast /> },
-    { direction: "ESE", icon: <MdSouthEast /> },
-    { direction: "E", icon: <MdEast /> },
-    { direction: "ENE", icon: <MdNorthEast /> },
-    { direction: "NE", icon: <MdNorthEast /> },
-    { direction: "NNE", icon: <MdNorthEast /> },
-    { direction: "N", icon: <MdNorth /> },
-    { direction: "NNW", icon: <MdNorthWest /> },
-    { direction: "NW", icon: <MdNorthWest /> },
-    { direction: "WNW", icon: <MdNorthWest /> },
-    { direction: "W", icon: <MdWest /> },
+    {
+      directionShort: "WSW",
+      direction: "West-Southwest",
+      icon: <MdSouthWest />,
+    },
+    { directionShort: "SW", direction: "Southwest", icon: <MdSouthWest /> },
+    {
+      directionShort: "SSW",
+      direction: "South-Southwest",
+      icon: <MdSouthWest />,
+    },
+    { directionShort: "S", direction: "South", icon: <MdSouth /> },
+    {
+      directionShort: "SSE",
+      direction: "South-Southeast",
+      icon: <MdSouthEast />,
+    },
+    { directionShort: "SE", direction: "Southeast", icon: <MdSouthEast /> },
+    {
+      directionShort: "ESE",
+      direction: "East-Southeast",
+      icon: <MdSouthEast />,
+    },
+    { directionShort: "E", direction: "East", icon: <MdEast /> },
+    {
+      directionShort: "ENE",
+      direction: "East-Northeast",
+      icon: <MdNorthEast />,
+    },
+    { directionShort: "NE", direction: "Northeast", icon: <MdNorthEast /> },
+    {
+      directionShort: "NNE",
+      direction: "North-Northeast",
+      icon: <MdNorthEast />,
+    },
+    { directionShort: "N", direction: "North", icon: <MdNorth /> },
+    {
+      directionShort: "NNW",
+      direction: "North-Northwest",
+      icon: <MdNorthWest />,
+    },
+    { directionShort: "NW", direction: "Northwest", icon: <MdNorthWest /> },
+    {
+      directionShort: "WNW",
+      direction: "West-Northwest",
+      icon: <MdNorthWest />,
+    },
+    { directionShort: "W", direction: "West", icon: <MdWest /> },
   ];
 
   const windDir = data?.current.wind_dir || "";
-  const windDirObj = windDirections.find((dir) => dir.direction === windDir);
+  const windDirObj = windDirections.find(
+    (dir) => dir.directionShort === windDir
+  );
   compassArw = windDirObj ? windDirObj.icon : null;
+  windDirName = windDirObj ? windDirObj.direction : null;
 
   const currentTime = new Date().toLocaleTimeString().substring(0, 5);
   let weatherIcon;
@@ -65,75 +100,82 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
   }
 
   return (
-    <div
-      className={`p-3 rounded-md text-slate-100 min-w-[60%] ${weatherBackgroundColor(
-        data?.current.condition.text
-      )}`}
-    >
-      <div className="pb-3">
-        <h2 className="font-semibold">Current weather</h2>
-        <p className="text-sm">{currentTime}</p>
-      </div>
-      <div className="flex flex-col">
-        <div className="flex">
-          <p className="text-[5rem] flex items-end mr-6">{weatherIcon}</p>
-          <p className="text-6xl">
-            {Math.round(data?.current.temp_c ?? 0)}
-            <sup className="text-4xl">°C</sup>
+    <div className="flex flex-col min-w-[60%]">
+      {data && (
+        <p className="mb-2 ml-1 text-xl text-stone-700/80 font-medium">
+          {data?.location.name}, {data?.location.country}
+        </p>
+      )}
+      <div
+        className={`p-3 rounded-md text-slate-100 ${weatherBackgroundColor(
+          data?.current.condition.text
+        )}`}
+      >
+        <div className="pb-3">
+          <h2 className="font-semibold">Current weather</h2>
+          <p className="text-sm">{currentTime}</p>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex">
+            <p className="text-[5rem] flex items-end mr-6">{weatherIcon}</p>
+            <p className="text-6xl">
+              {Math.round(data?.current.temp_c ?? 0)}
+              <sup className="text-4xl">°C</sup>
+            </p>
+            <div className="ml-6 mb-5 text-xl font-semibold mt-1.5">
+              <p>{data?.current.condition.text}</p>
+              <p className="text-sm font-normal">
+                perceived temp.{" "}
+                <span className="font-semibold">
+                  {Math.round(data?.current.feelslike_c ?? 0)}°
+                </span>
+              </p>
+            </div>
+          </div>
+          <p className="mb-5">
+            Today {data?.forecast.forecastday[0]?.day.condition.text}. The
+            maximum temperature will be{" "}
+            {Math.round(data?.forecast.forecastday[0]?.day.maxtemp_c ?? 0)}
+            <sup className="">°C</sup>
           </p>
-          <div className="ml-6 mb-5 text-xl font-semibold mt-1.5">
-            <p>{data?.current.condition.text}</p>
-            <p className="text-sm font-normal">
-              perceived temp.{" "}
-              <span className="font-semibold">
-                {Math.round(data?.current.feelslike_c ?? 0)}°
+        </div>
+        <div className="flex gap-x-8">
+          <div>
+            <p className="text-sm">Wind</p>
+            <p className="group flex items-center gap-1 font-semibold">
+              {Math.round(data?.current.wind_kph ?? 0)} km/h
+              <span className="inline-block relative">
+                {compassArw}
+                <span className="absolute hidden group-hover:block bg-gray-200 px-2 py-1 text-gray-800 text-xs rounded-md -top-8 -left-1/2 ">
+                  {windDirName}
+                </span>
               </span>
+              <sup className="group-hover:text-slate-300 -ml-1 text-base">
+                <AiOutlineInfoCircle />
+              </sup>
             </p>
           </div>
-        </div>
-        <p className="mb-5">
-          Today {data?.forecast.forecastday[0]?.day.condition.text}. The maximum
-          temperature will be{" "}
-          {Math.round(data?.forecast.forecastday[0]?.day.maxtemp_c ?? 0)}
-          <sup className="">°C</sup>
-        </p>
-      </div>
-      <div className="flex gap-x-8">
-        <div>
-          <p className="text-sm">Wind</p>
-          <p className="group flex items-center gap-1 font-semibold">
-            {Math.round(data?.current.wind_kph ?? 0)} km/h
-            <span className="inline-block relative">
-              {compassArw}
-              <span className="absolute hidden group-hover:block bg-gray-200 px-2 py-1 text-gray-800 text-xs rounded-md -top-8 -left-1/2 ">
-                {data?.current.wind_dir}
-              </span>
-            </span>
-            <sup className="group-hover:text-slate-300 -ml-1 text-base">
-              <AiOutlineInfoCircle />
-            </sup>
-          </p>
-        </div>
-        <div>
-          <p className="text-sm">Gust</p>{" "}
-          <p className="font-semibold">{data?.current.gust_kph} km/h</p>
-        </div>
-        <div>
-          <p className="text-sm">Humidity</p>
-          <p className="font-semibold"> {data?.current.humidity}%</p>
-        </div>
-        <div>
-          <p className="text-sm">Chance of rain</p>
-          <p className="font-semibold">
-            {data?.forecast.forecastday[0]?.day.daily_chance_of_rain}%
-          </p>
-        </div>
-        <div className="">
-          {" "}
-          <p className="text-sm">UV index max.</p>
-          <p className="font-semibold">
-            {data?.forecast.forecastday[0]?.day.uv}
-          </p>
+          <div>
+            <p className="text-sm">Gust</p>{" "}
+            <p className="font-semibold">{data?.current.gust_kph} km/h</p>
+          </div>
+          <div>
+            <p className="text-sm">Humidity</p>
+            <p className="font-semibold"> {data?.current.humidity}%</p>
+          </div>
+          <div>
+            <p className="text-sm">Chance of rain</p>
+            <p className="font-semibold">
+              {data?.forecast.forecastday[0]?.day.daily_chance_of_rain}%
+            </p>
+          </div>
+          <div className="">
+            {" "}
+            <p className="text-sm">UV index max.</p>
+            <p className="font-semibold">
+              {data?.forecast.forecastday[0]?.day.uv}
+            </p>
+          </div>
         </div>
       </div>
     </div>
