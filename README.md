@@ -1,46 +1,117 @@
-# Getting Started with Create React App
+# Simple Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple Weather is a weather application that provides current weather information based on the user's location. It utilizes the WeatherAPI.com API to retrieve weather data. This repository contains the source code for the Simple Weather app. You are welcome to explore, modify, and contribute to the development of the application.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before running the Simple Weather app, ensure that you have the following prerequisites installed on your system:
 
-### `npm start`
+- [Node.js](https://nodejs.org) (version 12 or higher)
+- [npm](https://www.npmjs.com/) (usually comes with Node.js installation)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Get the current weather information based on the user's location
+- Search for weather information by location name
+- Display temperature, weather condition, wind speed, and humidity
+- View hourly weather forecast for the next 24 hours
+- View weather forecast for the next days
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install and run the Simple Weather app, follow these steps:
 
-### `npm run build`
+1. Clone this repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/your-username/simple-weather-app
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd simple-weather-app
+```
 
-### `npm run eject`
+3. Install the dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Rename the `.env.example` file to `.env` and provide your WeatherAPI.com API key in the `REACT_APP_WEATHER_API_KEY` variable.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+5. Start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+This will start the development server at [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+6. Open [http://localhost:3000](http://localhost:3000) in your web browser to view the app.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
+
+The `src` directory contains the main code for the Simple Weather application. You can modify and extend the app by editing the files in this directory.
+
+The entry point for the application is `src/index.js`, where the root component is rendered.
+
+The `public` directory contains the public assets for the application, such as HTML and favicon files. You can customize the `public/index.html` file to include any additional scripts or stylesheets.
+
+## API Configuration
+
+The Simple Weather app uses the WeatherAPI.com API to fetch weather data. To configure the API settings, create the `.env.local` file in the project root directory and add the `REACT_APP_API_KEY` variable with your WeatherAPI.com API key.
+
+## Building for Production
+
+To build the app for production, use the following command:
+
+```bash
+npm run build
+```
+
+This will create an optimized and minified version of the app in the `build` directory.
+
+You can then deploy the contents of the `build` directory to your web server or any static hosting platform.
+
+## Contributing
+
+Contributions to the Simple Weather app are welcome! If you have any ideas, bug fixes, or improvements, please follow these steps:
+
+1. Fork the repository.
+
+2. Create a new branch:
+
+```bash
+git checkout -b my-feature
+```
+
+3. Make your modifications and commit changes:
+
+```bash
+git commit -am 'Add my feature'
+```
+
+4. Push the branch:
+
+```bash
+git push origin my-feature
+```
+
+5. Create a pull request.
+
+Please ensure that your code follows the project's coding style and conventions.
+
+## License
+
+The Simple Weather app is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this project for personal and commercial purposes.
+
+## Contact
+
+If you have any questions, suggestions, or feedback, feel free to contact the project owner:
+
+- Name: Hubert Paprocki
+- Email: hubertpaprocki.dev@gmail.com
+
+We hope you enjoy using the Simple Weather app! Stay updated with the latest weather conditions!
