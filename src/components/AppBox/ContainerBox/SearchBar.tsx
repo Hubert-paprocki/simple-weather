@@ -29,10 +29,15 @@ function SearchBar({
   return (
     <form className="flex h-10" onSubmit={handleSubmit}>
       <Input search refs={citySearchRef} placeholder="Choose city, country" />
-      <Button type="button" location onClick={fetchLocationData}>
+      <Button
+        type="button"
+        location
+        onClick={fetchLocationData}
+        ariaLabel="get user location"
+      >
         <BiCurrentLocation />
       </Button>
-      <Button type="submit" search>
+      <Button type="submit" search ariaLabel="search">
         <BiSearch />
       </Button>
     </form>

@@ -25,7 +25,7 @@ function ForecastWeatherList({ data }: ForecastWeatherListProps) {
 
   return (
     <div className="flex text-center overflow-hidden w-full gap-1 lg:ml-6">
-      <Button onClick={() => scroll("left")}>
+      <Button onClick={() => scroll("left")} ariaLabel="scroll left">
         <p className="text-3xl">
           <HiOutlineChevronLeft />
         </p>
@@ -38,7 +38,7 @@ function ForecastWeatherList({ data }: ForecastWeatherListProps) {
               <ForecastWeatherTile key={index} data={item} />
             ))}
       </div>
-      <Button onClick={() => scroll("right")}>
+      <Button onClick={() => scroll("right")} ariaLabel="scroll right">
         <p className="text-3xl">
           <HiOutlineChevronRight />
         </p>

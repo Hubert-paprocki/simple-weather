@@ -112,18 +112,18 @@ function CurrentWeather({ data }: CurrentWeatherProps) {
         )}`}
       >
         <div className="pb-3">
-          <h2 className="font-semibold">Current weather</h2>
+          <h1 className="font-semibold">Current weather</h1>
           <p className="text-sm">{currentTime}</p>
         </div>
         <div className="flex flex-col">
           <div className="flex">
             <p className="text-[5rem] flex items-end mr-6">{weatherIcon}</p>
-            <p className="text-6xl">
+            <h2 className="text-6xl">
               {Math.round(data?.current.temp_c ?? 0)}
               <sup className="text-4xl">°C</sup>
-            </p>
+            </h2>
             <div className="ml-6 mb-5 text-xl font-semibold mt-1.5">
-              <p>{data?.current.condition.text}</p>
+              <h3>{data?.current.condition.text}</h3>
               <p className="text-sm font-normal">
                 perceived temp.{" "}
                 <span className="font-semibold">

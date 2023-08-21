@@ -52,7 +52,7 @@ function HourlyWeatherList({ data }: HourlyWeatherListProps) {
 
   return (
     <div className="bg-slate-50 lg:rounded-md p-7 flex gap-1">
-      <Button onClick={() => scroll("left")}>
+      <Button onClick={() => scroll("left")} ariaLabel="scroll left">
         <p className="text-3xl">
           <HiOutlineChevronLeft />
         </p>
@@ -63,7 +63,7 @@ function HourlyWeatherList({ data }: HourlyWeatherListProps) {
       >
         {hourlyWeatherTiles}
       </div>
-      <Button onClick={() => scroll("right")}>
+      <Button onClick={() => scroll("right")} ariaLabel="scroll right">
         <p className="text-3xl">
           <HiOutlineChevronRight />
         </p>

@@ -91,17 +91,17 @@ function ForecastWeatherTile({ data }: ForecastWeatherTileProps) {
           data.day.condition.text
         )}w-1/3 h-full bg-blue-400 rounded-md flex flex-col text-2xl lg:text-3xl text-slate-100 font-medium  px-2`}
       >
-        <p className="h-full flex items-center justify-center py-2 lg:py-1">
+        <h4 className="h-full flex items-center justify-center py-2 lg:py-1">
           {Math.round(data.day.maxtemp_c ?? 0)}
           <sup className="mt-3">°</sup>
-        </p>
+        </h4>
         <div className="h-full flex items-center justify-center">
           <p className="text-6xl lg:text-7xl">{weatherIcon}</p>
         </div>
-        <p className="h-full flex items-center justify-center py-2 lg:py-1">
+        <h4 className="h-full flex items-center justify-center py-2 lg:py-1">
           {Math.round(data.day.mintemp_c ?? 0)}
           <sup className="mt-3">°</sup>
-        </p>
+        </h4>
       </div>
     </div>
   );

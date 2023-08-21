@@ -9,6 +9,7 @@ interface ButtonProps {
   readonly location?: boolean;
   readonly switchsBtn?: boolean;
   readonly activeBtn?: boolean;
+  readonly ariaLabel?: string;
 }
 
 function Button({
@@ -21,6 +22,7 @@ function Button({
   location,
   switchsBtn,
   activeBtn,
+  ariaLabel,
 }: ButtonProps): JSX.Element {
   let classes;
   let active =
@@ -51,6 +53,7 @@ function Button({
       className={classes}
       style={{ WebkitTapHighlightColor: "transparent" }}
       disabled={disabled || false}
+      aria-label={ariaLabel}
     >
       {children}
     </button>
